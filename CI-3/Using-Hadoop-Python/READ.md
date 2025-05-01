@@ -1,6 +1,4 @@
-Here's your `README.md` file for the Hadoop MapReduce Character and Word Count Execution Guide:
 
-```markdown
 # Hadoop MapReduce - Character and Word Count Execution Guide
 
 This guide provides the exact commands to run **character count** and **word count** MapReduce jobs using **Hadoop Streaming** with **Python scripts**.
