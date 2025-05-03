@@ -13,7 +13,7 @@ public class Server extends UnicastRemoteObject implements Concat {
     public String concat(String a, String b) { return a + b; }
 
     public static void main(String[] args) throws Exception {
-        LocateRegistry.createRegistry(1099); // Start registry in code
+        LocateRegistry.createRegistry(1099); 
         Naming.rebind("concat", new Server());
         System.out.println("RMI Server ready");
     }
