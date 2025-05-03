@@ -71,7 +71,7 @@ hdfs dfs -rm -r -f word_output
 Execute the **Character Count** MapReduce job using Hadoop Streaming:
 
 ```bash
-hadoop jar $(find /opt/homebrew/Cellar/hadoop -name hadoop-streaming-*.jar) \
+hadoop jar /opt/homebrew/Cellar/hadoop/3.4.1/libexec/share/hadoop/tools/lib/hadoop-streaming-3.4.1.jar \
   -input input/input.txt \
   -output char_output \
   -mapper "./char_mapper.py" \
