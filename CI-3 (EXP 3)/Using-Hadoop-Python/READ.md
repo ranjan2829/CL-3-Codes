@@ -71,11 +71,11 @@ hdfs dfs -rm -r -f word_output
 Execute the **Character Count** MapReduce job using Hadoop Streaming:
 
 ```bash
-hadoop jar /opt/homebrew/Cellar/hadoop/3.4.1/libexec/share/hadoop/tools/lib/hadoop-streaming-3.4.1.jar \
-  -input input/input.txt \
-  -output char_output \
-  -mapper "./char_mapper.py" \
-  -reducer "./char_reducer.py"
+hadoop jar %HADOOP_HOME%\share\hadoop\tools\lib\hadoop-streaming-*.jar ^
+  -input input/input.txt ^
+  -output char_output ^
+  -mapper "python char_mapper.py" ^
+  -reducer "python char_reducer.py"
 ```
 
 ---
@@ -95,11 +95,11 @@ hdfs dfs -cat char_output/part-00000
 Execute the **Word Count** MapReduce job using Hadoop Streaming:
 
 ```bash
-hadoop jar $(find /opt/homebrew/Cellar/hadoop -name hadoop-streaming-*.jar) \
-  -input input/input.txt \
-  -output word_output \
-  -mapper "./word_mapper.py" \
-  -reducer "./word_reducer.py"
+hadoop jar %HADOOP_HOME%\share\hadoop\tools\lib\hadoop-streaming-*.jar ^
+  -input input/input.txt ^
+  -output word_output ^
+  -mapper "python word_mapper.py" ^
+  -reducer "python word_reducer.py"
 ```
 
 ---
