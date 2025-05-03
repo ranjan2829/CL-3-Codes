@@ -14,7 +14,7 @@ def mapper():
             continue
             
         columns = line.split(',')
-        if len(columns) >= 3:  # Changed from 4 to 3
+        if len(columns) >= 3:  
             try:
                 year = columns[0]
                 temperature = float(columns[2])  
@@ -26,8 +26,8 @@ def mapper():
 def reducer():
     current_year = None
     max_temp = float('-inf')  
-    min_temp = float('inf')   # This is correct
-    global_max_temp = float('-inf')  # This is correct
+    min_temp = float('inf')   
+    global_max_temp = float('-inf')  
     global_min_temp = float('inf')   
     global_hottest_year = global_coldest_year = None
 
