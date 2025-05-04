@@ -1,31 +1,42 @@
-# Pyro4 String Concatenation Example
 
-This project demonstrates a simple client-server application using Pyro4 for remote string concatenation.
+
+````markdown
+# Pyro5 String Concatenation Example
 
 ## How to Run
 
-1. **Start the Pyro4 Name Server**  
-   Open a terminal and run:
+1. **Install Pyro5**  
+   ```bash
+   pip install Pyro5
+````
+
+2. **Start Pyro5 Name Server**
+
+   ```bash
+   pyro5-ns
    ```
+
+   *If Pyro5 isn't working, use Pyro4:*
+
+   ```bash
    python3 -m Pyro4.naming
    ```
 
-2. **Start the Server**  
-   In a new terminal, run:
-   ```
+3. **Start the Server**
+
+   ```bash
    python3 server.py
    ```
 
-3. **Run the Client**  
-   In another terminal, run:
-   ```
+4. **Run the Client**
+
+   ```bash
    python3 client.py
    ```
 
 ## How it Works
 
-- The server exposes a method to concatenate two strings.
-- The client reads the server URI from `server_uri.txt`, takes two strings as input, and prints the concatenated result.
+* Server exposes a method to concatenate two strings.
+* Client reads `server_uri.txt`, inputs two strings, and prints the result.
 
-**Note:**  
-Make sure `server_uri.txt` is in the same directory as the client and server scripts.
+**Note:** Ensure `server_uri.txt` is in the same directory as `server.py` and `client.py`.

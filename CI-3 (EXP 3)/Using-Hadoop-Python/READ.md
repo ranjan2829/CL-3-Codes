@@ -74,8 +74,8 @@ Execute the **Character Count** MapReduce job using Hadoop Streaming:
 hadoop jar %HADOOP_HOME%\share\hadoop\tools\lib\hadoop-streaming-*.jar ^
   -input input/input.txt ^
   -output char_output ^
-  -mapper "python char_mapper.py" ^
-  -reducer "python char_reducer.py"
+  -mapper "python3 char_mapper.py" ^
+  -reducer "python3 char_reducer.py"
 ```
 
 ---
