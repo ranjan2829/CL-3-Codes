@@ -1,7 +1,7 @@
 import duckdb
 
 # Connect to your database
-db_path = "fyers_data.db"
+db_path = "RELIANCE_EQ.db"
 conn = duckdb.connect(db_path)
 
 # Get schema information 
