@@ -1,0 +1,4 @@
+{"level":"DEBUG","location":"[get_call:140] fyersModel","message":{"Status Code":200,"API":"/depth"},"timestamp":"2025-06-03 09:30:19,268+0530","service":"FyersAPIRequest"}
+{"level":"DEBUG","location":"[get_call:140] fyersModel","message":{"Status Code":200,"API":"/depth"},"timestamp":"2025-06-03 09:30:19,369+0530","service":"FyersAPIRequest"}
+{"level":"DEBUG","location":"[get_call:140] fyersModel","message":{"Status Code":400,"API":"/depth"},"timestamp":"2025-06-03 09:31:14,503+0530","service":"FyersAPIRequest"}
+{"level":"DEBUG","location":"[get_call:140] fyersModel","message":{"Status Code":400,"API":"/depth"},"timestamp":"2025-06-03 09:50:46,213+0530","service":"FyersAPIRequest"}

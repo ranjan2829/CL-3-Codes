@@ -1,0 +1,2 @@
+{"level":"ERROR","location":"[get_call:146] fyersModel","message":{"API":"/depth","Error":{"code":-300,"message":"Please provide a valid symbol","s":"error"}},"timestamp":"2025-06-03 09:31:14,504+0530","service":"FyersAPI"}
+{"level":"ERROR","location":"[get_call:146] fyersModel","message":{"API":"/depth","Error":{"code":-300,"message":"Please provide a valid symbol","s":"error"}},"timestamp":"2025-06-03 09:50:46,214+0530","service":"FyersAPI"}
