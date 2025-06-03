@@ -411,12 +411,7 @@ def main():
         print(f"{Fore.YELLOW}Waiting for initial data...{Style.RESET_ALL}")
         
         while True:
-            # Add jitter to polling interval to avoid predictable patterns
-            jitter = random.uniform(-0.5, 0.5)
-            poll_interval = max(1.0, base_interval + jitter)
-            
-            start_time = time.time()
-            
+        
             try:
                 # Fetch orderbook data
                 orderbook = fetch_orderbook(fyers)
@@ -445,33 +440,32 @@ def main():
                     # Success - keep regular interval
                     base_interval = 2.0
                     
-                else:
-                    print(f"{Fore.RED}Failed to fetch orderbook data. Retrying...{Style.RESET_ALL}")
+                else:   
+                    # Increment error counter
                     consecutive_errors += 1
-            
-            except Exception as e:
+                    
+                    # If we have too many consecutive errors, increase the interval
+                    if consecutive_errors >= 5:
+                        base_interval = min(base_interval * 2, 30.0)
+                    else:
+                        base_interval = max(base_interval - 0.5, 1.0)
+                # Sleep for the current interval
+                time.sleep(base_interval)
+            except Exception as e:  
                 logger.error(f"Error in main loop: {str(e)}")
-                print(f"{Fore.RED}Error: {str(e)}{Style.RESET_ALL}")
                 consecutive_errors += 1
-            
-            # If we're getting consecutive errors, back off
-            if consecutive_errors > 0:
-                # Increase interval exponentially with each consecutive error
-                back_off_interval = min(60.0, base_interval * (2 ** consecutive_errors))
-                print(f"{Fore.YELLOW}Backing off due to errors. Next attempt in {back_off_interval:.1f} seconds{Style.RESET_ALL}")
-                base_interval = back_off_interval
                 
-                # If we've had errors and need to start over with display
-                if consecutive_errors > 3:
-                    first_display = True
+                # If we have too many consecutive errors, increase the interval
+                if consecutive_errors >= 5:
+                    base_interval = min(base_interval * 2, 30.0)
+                else:
+                    base_interval = max(base_interval - 0.5, 1.0)
+                
+                # Sleep for the current interval
+                time.sleep(base_interval)
+               
             
-            # Calculate time to sleep
-            elapsed = time.time() - start_time
-            sleep_time = max(0.1, poll_interval - elapsed)
-            
-            # Sleep until next poll
-            time.sleep(sleep_time)
-            
+           
     except KeyboardInterrupt:
         signal_handler(None, None)
 
