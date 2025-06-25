@@ -2,8 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 import time
-
-# Setup headless Chrome
 options = Options()
 options.add_argument("--headless")
 options.add_argument("--disable-gpu")
@@ -13,24 +11,16 @@ driver = webdriver.Chrome(options=options)
 
 url = "https://www.nseindia.com/market-data/equity-block-deals"
 driver.get(url)
-
-# Wait for the page to load JS data properly
 time.sleep(5)
-
 html = driver.page_source
-
-# Parse with BeautifulSoup
 soup = BeautifulSoup(html, 'html.parser')
-
-# The block deals table
 table = soup.find('table', {'id': 'equityBlockDeals'})
-
 if not table:
     print("Block deals table not found!")
     driver.quit()
     exit()
 
-rows = table.find_all('tr')[1:]  # skip header
+rows = table.find_all('tr')[1:]
 
 for row in rows:
     cols = row.find_all('td')
