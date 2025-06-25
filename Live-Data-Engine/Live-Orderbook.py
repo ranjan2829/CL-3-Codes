@@ -13,25 +13,15 @@ import sys
 import random
 from colorama import Fore, Back, Style, init
 import shutil
-
-# Initialize colorama
 init()
-
-# Setup logging
 logs_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../Logs')
 os.makedirs(logs_dir, exist_ok=True)
 log_file_path = os.path.join(logs_dir, f'rest_orderbook_{datetime.now().strftime("%Y%m%d")}.log')
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', 
                     handlers=[logging.StreamHandler(), logging.FileHandler(log_file_path)])
 logger = logging.getLogger(__name__)
-
-# Symbol to track
 SYMBOL = "NSE:NIFTY25JUNFUT"
-
-# Data storage
-historical_data = deque(maxlen=100)  # Store recent history for stochastic modeling
-
-# CSV for data storage
+historical_data = deque(maxlen=100)
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 csv_filename = f"stochastic_orderbook_{SYMBOL.replace(':', '_')}_{timestamp}.csv"
 
