@@ -1,5 +1,5 @@
 
-access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiZDoxIiwiZDoyIiwieDowIiwieDoxIiwieDoyIl0sImF0X2hhc2giOiJnQUFBQUFCb1BuSGNmcHlYcHEzMzVXbXNlQkN4WW1FT3RNRHBwNjZPdjVtMjhrLWQxaFE0eHgtQWdOc2JkVnZSZXNEVHNQdlcwMzhtZnVNbWFrTHBnTFRaRkswUTJFYzMyQnB0eVA0a1V4YUhqZF9pdk9PZXdLYz0iLCJkaXNwbGF5X25hbWUiOiIiLCJvbXMiOiJLMSIsImhzbV9rZXkiOiJkZWNhY2RhZDNmNzdjMGNkYTE0OThlNzY1MzdiMTMyYjcxNGMyZTg0NmQzNDFmMmZiYzkzZmY1YSIsImlzRGRwaUVuYWJsZWQiOiJOIiwiaXNNdGZFbmFibGVkIjoiTiIsImZ5X2lkIjoiWFIyMDE4NSIsImFwcFR5cGUiOjEwMCwiZXhwIjoxNzQ4OTk3MDAwLCJpYXQiOjE3NDg5MjI4NDQsImlzcyI6ImFwaS5meWVycy5pbiIsIm5iZiI6MTc0ODkyMjg0NCwic3ViIjoiYWNjZXNzX3Rva2VuIn0.DEUwHCRwK7GO-E869LO1EKSGRxjygcu4tesq5vj0Grw"
+access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiZDoxIiwiZDoyIiwieDowIiwieDoxIiwieDoyIl0sImF0X2hhc2giOiJnQUFBQUFCb2IzLXlPTzR5NGhIcVk2YndnaG1BVFgyaDFVWWxUWG9SRl9jd2hNejJWLUFDWnVPOURqckZMSGZRTnIwVUEtWldRZVR3bGdMVlBXRTNPekJ5WGhteW1jUUNGSGxLUnRtOTZqZ0NMWHpkMmlxRk9zOD0iLCJkaXNwbGF5X25hbWUiOiIiLCJvbXMiOiJLMSIsImhzbV9rZXkiOiJkZWNhY2RhZDNmNzdjMGNkYTE0OThlNzY1MzdiMTMyYjcxNGMyZTg0NmQzNDFmMmZiYzkzZmY1YSIsImlzRGRwaUVuYWJsZWQiOiJOIiwiaXNNdGZFbmFibGVkIjoiTiIsImZ5X2lkIjoiWFIyMDE4NSIsImFwcFR5cGUiOjEwMCwiZXhwIjoxNzUyMTkzODAwLCJpYXQiOjE3NTIxMzc2NTAsImlzcyI6ImFwaS5meWVycy5pbiIsIm5iZiI6MTc1MjEzNzY1MCwic3ViIjoiYWNjZXNzX3Rva2VuIn0.7iqQmH6dOyGfSMHXGPKhNYJujyD11Ku6i-_a2SyoPSE"
 from fyers_apiv3.FyersWebsocket.tbt_ws import FyersTbtSocket, SubscriptionModes
 
 def onopen():
@@ -8,16 +8,12 @@ def onopen():
 
     """
     print("Connection opened")
-    # Specify the data type and symbols you want to subscribe to
     mode = SubscriptionModes.DEPTH
     Channel = '1'
-    # Subscribe to the specified symbols and data type
     symbols = ['NIFTY25JUNFUT']
     
     fyers.subscribe(symbol_tickers=symbols, channelNo=Channel, mode=mode)
     fyers.switchChannel(resume_channels=[Channel], pause_channels=[])
-
-    # Keep the socket running to receive real-time data
     fyers.keep_running()
 
 def on_depth_update(ticker, message):
@@ -52,14 +48,11 @@ def onerror(message):
 
     """
     print("Error:", message)
-
-
 def onclose(message):
     """
     Callback function to handle WebSocket connection close events.
     """
     print("Connection closed:", message)
-
 def onerror_message(message):
     """
     Callback function for error message events from the server
@@ -72,14 +65,13 @@ def onerror_message(message):
 
 
 fyers = FyersTbtSocket(
-    access_token=access_token,  # Your access token for authenticating with the Fyers API.
-    write_to_file=False,        # A boolean flag indicating whether to write data to a log file or not.
-    log_path="",                # The path to the log file if write_to_file is set to True (empty string means current directory).
-    on_open=onopen,          # Callback function to be executed upon successful WebSocket connection.
-    on_close=onclose,           # Callback function to be executed when the WebSocket connection is closed.
-    on_error=onerror,           # Callback function to handle any WebSocket errors that may occur.
-    on_depth_update=on_depth_update, # Callback function to handle depth-related events from the WebSocket
-    on_error_message=onerror_message         # Callback function to handle server-related erros from the WebSocket.
+    access_token=access_token,
+    write_to_file=False,
+    log_path="",
+    on_open=onopen,
+    on_close=onclose,
+    on_error=onerror,
+    on_depth_update=on_depth_update,
+    on_error_message=onerror_message
 )
-# Establish a connection to the Fyers WebSocket
 fyers.connect()
