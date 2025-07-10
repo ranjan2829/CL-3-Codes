@@ -9,7 +9,7 @@ init()
 
 SYMBOL = "NSE:NIFTY25JULFUT"
 historical_data = deque(maxlen=100)
-price_history = deque(maxlen=60)  # Store 60 seconds of price data for charting
+price_history = deque(maxlen=60)
 
 def signal_handler(sig, frame):
     print(f"\n{Fore.YELLOW}Stopped{Style.RESET_ALL}")
@@ -93,42 +93,25 @@ def generate_sparkline(data, width=30, min_val=None, max_val=None):
     """Generate a sparkline chart from data"""
     if not data or len(data) < 2:
         return "Collecting data..."
-    
-    # Determine min and max values
     if min_val is None:
         min_val = min(data)
     if max_val is None:
         max_val = max(data)
-    
-    # If all values are the same, create a flat line
     if min_val == max_val:
         return '─' * width
-    
-    # Unicode block elements for chart (8 levels)
     blocks = ' ▁▂▃▄▅▆▇█'
-    
-    # Scale data to fit within available blocks
     scaled_data = []
     for point in data:
         if max_val == min_val:
-            # Avoid division by zero if all values are the same
-            scaled_point = 4  # Middle block
+            scaled_point = 4
         else:
-            # Scale to 0-8 range (9 possible blocks including space)
             scaled_point = int(((point - min_val) / (max_val - min_val)) * 8)
         scaled_data.append(scaled_point)
-    
-    # If we have more data points than width, sample the data
     if len(scaled_data) > width:
-        # Simple sampling - take evenly spaced points
         indices = np.linspace(0, len(scaled_data)-1, width).astype(int)
         scaled_data = [scaled_data[i] for i in indices]
-    
-    # If we have fewer data points than width, repeat the last value
     while len(scaled_data) < width:
         scaled_data.append(scaled_data[-1] if scaled_data else 4)
-    
-    # Generate the sparkline
     return ''.join(blocks[point] for point in scaled_data)
 
 def create_price_chart(prices, width=40, height=10):
@@ -139,38 +122,27 @@ def create_price_chart(prices, width=40, height=10):
     # Calculate min and max for scaling
     min_price = min(prices)
     max_price = max(prices)
-    
-    # Ensure a minimum range to avoid flat lines when prices are very stable
     price_range = max_price - min_price
     if price_range < 0.1:  # Minimum range of 0.1 points
         avg_price = (max_price + min_price) / 2
         min_price = avg_price - 0.05
         max_price = avg_price + 0.05
-    
-    # Create the chart rows
     chart = []
-    
-    # Add price labels on y-axis
     for i in range(height, 0, -1):
         # Calculate price level for this row
         price_level = min_price + (max_price - min_price) * (i - 1) / (height - 1)
         
         # Add price label
         row = f"{price_level:.1f} "
-        
-        # Add chart points
         for j, price in enumerate(prices):
             if j >= width:
                 break
-                
-            # Determine if this price should have a marker at this height
             normalized_price = (price - min_price) / (max_price - min_price) * (height - 1)
             row_price_level = (i - 1)
             
             if abs(normalized_price - row_price_level) < 0.5:
                 row += "o"
             elif j > 0 and j < len(prices) - 1:
-                # Check if line passes through this row
                 prev_price = prices[j-1]
                 normalized_prev = (prev_price - min_price) / (max_price - min_price) * (height - 1)
                 
@@ -183,12 +155,8 @@ def create_price_chart(prices, width=40, height=10):
                 row += " "
         
         chart.append(row)
-    
-    # Add time axis
     time_axis = "     " + "".join(["-" for _ in range(min(width, len(prices)))])
     chart.append(time_axis)
-    
-    # Add current and time labels
     current_price = prices[-1] if prices else 0
     chart.append(f"Current: {current_price:.2f} | Time span: {len(prices)} seconds")
     
