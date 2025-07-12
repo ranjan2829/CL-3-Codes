@@ -295,8 +295,7 @@ def main():
     
     # Access token for Fyers API
     client_id = "QGP6MO6UJQ-100"
-    access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiZDoxIiwiZDoyIiwieDowIiwieDoxIiwieDoyIl0sImF0X2hhc2giOiJnQUFBQUFCb2IzLXlPTzR5NGhIcVk2YndnaG1BVFgyaDFVWWxUWG9SRl9jd2hNejJWLUFDWnVPOURqckZMSGZRTnIwVUEtWldRZVR3bGdMVlBXRTNPekJ5WGhteW1jUUNGSGxLUnRtOTZqZ0NMWHpkMmlxRk9zOD0iLCJkaXNwbGF5X25hbWUiOiIiLCJvbXMiOiJLMSIsImhzbV9rZXkiOiJkZWNhY2RhZDNmNzdjMGNkYTE0OThlNzY1MzdiMTMyYjcxNGMyZTg0NmQzNDFmMmZiYzkzZmY1YSIsImlzRGRwaUVuYWJsZWQiOiJOIiwiaXNNdGZFbmFibGVkIjoiTiIsImZ5X2lkIjoiWFIyMDE4NSIsImFwcFR5cGUiOjEwMCwiZXhwIjoxNzUyMTkzODAwLCJpYXQiOjE3NTIxMzc2NTAsImlzcyI6ImFwaS5meWVycy5pbiIsIm5iZiI6MTc1MjEzNzY1MCwic3ViIjoiYWNjZXNzX3Rva2VuIn0.7iqQmH6dOyGfSMHXGPKhNYJujyD11Ku6i-_a2SyoPSE"
-    
+    access_token = ""
     # Initialize Fyers API client
     fyers = fyersModel.FyersModel(client_id=client_id, token=access_token, is_async=False, log_path="")
     

@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 FYERS_CLIENT_ID = "QGP6MO6UJQ-100"
-FYERS_ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiZDoxIiwiZDoyIiwieDowIiwieDoxIiwieDoyIl0sImF0X2hhc2giOiJnQUFBQUFCb1BuSGNmcHlYcHEzMzVXbXNlQkN4WW1FT3RNRHBwNjZPdjVtMjhrLWQxaFE0eHgtQWdOc2JkVnZSZXNEVHNQdlcwMzhtZnVNbWFrTHBnTFRaRkswUTJFYzMyQnB0eVA0a1V4YUhqZF9pdk9PZXdLYz0iLCJkaXNwbGF5X25hbWUiOiIiLCJvbXMiOiJLMSIsImhzbV9rZXkiOiJkZWNhY2RhZDNmNzdjMGNkYTE0OThlNzY1MzdiMTMyYjcxNGMyZTg0NmQzNDFmMmZiYzkzZmY1YSIsImlzRGRwaUVuYWJsZWQiOiJOIiwiaXNNdGZFbmFibGVkIjoiTiIsImZ5X2lkIjoiWFIyMDE4NSIsImFwcFR5cGUiOjEwMCwiZXhwIjoxNzQ4OTk3MDAwLCJpYXQiOjE3NDg5MjI4NDQsImlzcyI6ImFwaS5meWVycy5pbiIsIm5iZiI6MTc0ODkyMjg0NCwic3ViIjoiYWNjZXNzX3Rva2VuIn0.DEUwHCRwK7GO-E869LO1EKSGRxjygcu4tesq5vj0Grw"
+FYERS_ACCESS_TOKEN = ""
 redis_client = redis.Redis(host="localhost", port=6379, db=0, decode_responses=True)
 
 VALID_MINUTE_RESOLUTIONS = {1, 2, 3, 5, 10, 15, 20, 30, 45, 60, 120, 180, 240}
